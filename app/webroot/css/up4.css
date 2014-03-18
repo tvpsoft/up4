@@ -1,0 +1,315 @@
+/* Space out content a bit */
+body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    min-width: 480px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.footer {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+/* Custom page header */
+.header {
+    height: 49px;
+    padding-top: 0;
+    background-image: url('../img/header-bg.png');
+    background-repeat: repeat-x;
+    background-color: #000;
+    border-bottom: 1px solid #e5e5e5;
+}
+.header-logout{
+    vertical-align: central;
+    margin-top: 6px;
+    float: right;
+    position: relative;
+}
+.header-logout a{
+    margin: 4px;
+    margin-top: 10px;
+    color: #e5e5e5;
+
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    padding-bottom: 19px;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+    margin-top:  19px;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+/* Customize container */
+@media (min-width: 890px) {
+    .container {
+        max-width: 890px;
+    }
+}
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    width: 460px;
+    text-align: center;
+    margin: auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+    padding: 14px 24px;
+    font-size: 21px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    /* Remove the padding we set earlier */
+    .header,
+    .footer {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+
+
+/*Collapse caret*/
+.accordion-caret .panel-title:hover {
+    text-decoration: none;
+}
+.accordion-caret .panel-title:hover span,
+.accordion-caret .panel-title:hover strong {
+    text-decoration: none;
+}
+.accordion-caret .panel-title:after {
+    font-size: 25px;
+    vertical-align: -3px;
+}
+.accordion-caret .panel-title.collapsed .badgeBox:after {
+    content: "▸";
+    margin-right: 0px;
+}
+.accordion-caret .panel-title:not(.collapsed) .badgeBox:after {
+    content: "▾";
+    margin-right: 0px;
+}
+/*End Collapse caret*/
+
+
+/*Event Box*/
+.event_thumb {
+    /* max-width: 1200px; /* native or declared width of img src (if known) */
+    max-height: 60px;
+    overflow: hidden; 
+}
+img.scale {
+    /* corrects small inline gap at bottom of containing div */
+    display: block; 
+    width: 100%; /* corrects obscure Firefox bug */
+    max-width: 100%;
+    /* just in case, to force correct aspect ratio */
+    height: auto !important;
+    display: block; /* corrects small inline gap at bottom of containing div */
+    width: 100%; /* corrects obscure Firefox bug */
+    max-width: 100%;
+    /* just in case, to force correct aspect ratio */
+    height: auto !important;
+    /*width: auto\9; 
+    /* ie8+9 - use modernizr instead of this \9 hack */
+    /* lt ie8 */
+    -ms-interpolation-mode: bicubic;
+    /* optionally force a minimum size if img src size is known: */
+    /* min-height: 320px; /* max-height of .crop-height */
+    /* min-width: 480px; /* proportional to above */ 
+}
+.event_title{
+    font-size: 20px;
+    height: 60px;
+    overflow: hidden;
+    line-height: 90%;
+}
+.event_title a{
+    color: #000;
+}
+.event_title a:hover{
+    color: #285e8e;
+    text-decoration: none;
+}
+.event_time{
+    font-size: 18px;
+    font-weight: bolder;    
+}
+.event_param{
+    font-size: 14px;
+    color: #777;
+    height: 60px;
+    overflow: hidden;
+}
+.event_distance{
+    font-size: 14px;
+}
+/*End Event Box*/
+
+
+
+/* Loading panel*/
+.loadingG {
+    display: none;
+    margin: auto;
+    position: fixed;
+    top: 50px;
+    left: 46%;
+    text-align: center;
+    width:96px;
+    height:60px;
+    z-index: 999999;
+}
+
+.loadingG span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    margin: 30px auto;
+    background: #000000;
+    -moz-border-radius: 60px;
+    -moz-animation: loadingG 0.6s infinite alternate;
+    -webkit-border-radius: 60px;
+    -webkit-animation: loadingG 0.6s infinite alternate;
+    -ms-border-radius: 60px;
+    -ms-animation: loadingG 0.6s infinite alternate;
+    -o-border-radius: 60px;
+    -o-animation: loadingG 0.6s infinite alternate;
+    border-radius: 60px;
+    animation: loadingG 0.6s infinite alternate;
+}
+
+#loadingG_1 {
+    -moz-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    -ms-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+#loadingG_2 {
+    -moz-animation-delay: 0.18s;
+    -webkit-animation-delay: 0.18s;
+    -ms-animation-delay: 0.18s;
+    -o-animation-delay: 0.18s;
+    animation-delay: 0.18s;
+}
+
+#loadingG_3 {
+    -moz-animation-delay: 0.36s;
+    -webkit-animation-delay: 0.36s;
+    -ms-animation-delay: 0.36s;
+    -o-animation-delay: 0.36s;
+    animation-delay: 0.36s;
+}
+
+@-moz-keyframes loadingG {
+    0% {
+        width: 12px;
+        height: 12px;
+        background-color:#000000;
+        -moz-transform: translateY(0);
+    }
+
+    100% {
+        width: 29px;
+        height: 29px;
+        background-color:#FFFFFF;
+        -moz-transform: translateY(-25px);
+    }
+
+}
+
+@-webkit-keyframes loadingG {
+    0% {
+        width: 12px;
+        height: 12px;
+        background-color:#000000;
+        -webkit-transform: translateY(0);
+    }
+
+    100% {
+        width: 29px;
+        height: 29px;
+        background-color:#FFFFFF;
+        -webkit-transform: translateY(-25px);
+    }
+
+}
+
+@-ms-keyframes loadingG {
+    0% {
+        width: 12px;
+        height: 12px;
+        background-color:#000000;
+        -ms-transform: translateY(0);
+    }
+
+    100% {
+        width: 29px;
+        height: 29px;
+        background-color:#FFFFFF;
+        -ms-transform: translateY(-25px);
+    }
+
+}
+
+@-o-keyframes loadingG {
+    0% {
+        width: 12px;
+        height: 12px;
+        background-color:#000000;
+        -o-transform: translateY(0);
+    }
+
+    100% {
+        width: 29px;
+        height: 29px;
+        background-color:#FFFFFF;
+        -o-transform: translateY(-25px);
+    }
+
+}
+
+@keyframes loadingG {
+    0% {
+        width: 12px;
+        height: 12px;
+        background-color:#000000;
+        transform: translateY(0);
+    }
+
+    100% {
+        width: 29px;
+        height: 29px;
+        background-color:#FFFFFF;
+        transform: translateY(-25px);
+    }
+
+} 
+/*End Loading*/

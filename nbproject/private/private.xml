@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Controller/AppController.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/View/Events/events_by_day.ctp</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/View/Layouts/default.ctp</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Model/Event.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Config/routes.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Model/Venue.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/View/Elements/events/event_panel_one_day.ctp</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Config/core.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Config/Schema/up4test.sql</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/View/Events/index.ctp</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Config/bootstrap.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/webroot/css/up4.css</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/Controller/EventsController.php</file>
+            <file>file:/Volumes/TVPDATA/WorkingSpace/XamppWorkspace/up4/app/View/Pages/home.ctp</file>
+        </group>
+    </open-files>
+</project-private>
