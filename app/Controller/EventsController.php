@@ -13,9 +13,10 @@ class EventsController extends AppController {
         $sql_event_date = "DATE(`start_time`)"; //TODO: paging the next event date
         $nextEventDate = $this->Event->find("all", array("fields" => array($sql_event_date . " AS event_date", "COUNT(*) as total_events"), "conditions" => array($sql_event_date . " >= CURRENT_DATE()"), "order" => array($sql_event_date), "group" => array("event_date")));
         $this->set("nextEventDate", $nextEventDate);
-        
-        $statTotal = $this->Event->find("all", array("fields" => array("Count(*) as total_events","Max(`start_time`) as max_date","Min(`start_time`) as min_date")));
-        $this->set("statTotal", $statTotal);;
+
+        $statTotal = $this->Event->find("all", array("fields" => array("Count(*) as total_events", "Max(`start_time`) as max_date", "Min(`start_time`) as min_date")));
+        $this->set("statTotal", $statTotal);
+        ;
 
         //$date = new DateTime("2014-03-08T19:00:00+0100", new DateTimeZone("Europe/Paris"));
         //debug($date);
@@ -101,31 +102,32 @@ class EventsController extends AppController {
             //Find attending
             $Facebook = new FB();
             $strFQL = str_replace(" ", "+", "select eid,all_members_count, attending_count FROM event where eid IN " . $strEventId);
-            $fqlAttendng = $Facebook->api("/fql?q=" . $strFQL);
-
             //Find friend join the event
-            $strFQL = str_replace(" ", "+", "SELECT eid,uid FROM event_member WHERE eid IN " . $strEventId . " AND rsvp_status = 'attending' AND uid IN (SELECT uid2 FROM friend WHERE uid1 = me())");
-            $fql = $Facebook->api("/fql?q=" . $strFQL);
+            $strFQL2 = str_replace(" ", "+", "SELECT eid,uid FROM event_member WHERE eid IN " . $strEventId . " AND rsvp_status = 'attending' AND uid IN (SELECT uid2 FROM friend WHERE uid1 = me())");
+
+            $fql = $Facebook->api("/fql?q={\"attending\":\"" . $strFQL . "\",\"amis\":\"" . $strFQL2 . "\"}");
 
             $arrNextEvents = array();
             foreach ($todayEvents as $event) {
                 $amisCount = 0;
                 $arrAmis = array();
-                foreach ($fql["data"] as $amis) {
-                    if ($amis["eid"] == $event["Event"]["id"]) {
-                        array_push($arrAmis, $amis["uid"]);
-                        $amisCount++;
+                if (!empty($fql["data"][0]["fql_result_set"])) {
+                    foreach ($fql["data"][0]["fql_result_set"] as $amis) {
+                        if ($amis["eid"] == $event["Event"]["id"]) {
+                            array_push($arrAmis, $amis["uid"]);
+                            $amisCount++;
+                        }
+                    }
+                    $event["Event"]["attending_friends"] = $amisCount;
+                    $event["Amis"] = $arrAmis;
+                }
+                if (!empty($fql["data"][1]["fql_result_set"])) {
+                    foreach ($fql["data"][1]["fql_result_set"] as $eventAttending) {
+                        if ($eventAttending["eid"] == $event["Event"]["id"]) {
+                            $event["Attending"] = $eventAttending;
+                        }
                     }
                 }
-                $event["Event"]["attending_friends"] = $amisCount;
-                $event["Amis"] = $arrAmis;
-
-                foreach ($fqlAttendng["data"] as $eventAttending) {
-                    if ($eventAttending["eid"] == $event["Event"]["id"]) {
-                        $event["Attending"] = $eventAttending;
-                    }
-                }
-
                 if (!empty($event["Venue"]["id"]) && $myLongitude != "undefined") {
                     $event["Event"]["distance"] = number_format($this->getDistance($event["Venue"]["latitude"], $event["Venue"]["longitude"], $myLatitude, $myLongitude, "K"), 2, ',', ' ');
                 } else {
@@ -136,6 +138,34 @@ class EventsController extends AppController {
 
             $this->set("todayEvents", $arrNextEvents);
         }
+    }
+
+    function fql_multi() {
+        $event_date = "2014-03-18";
+        $sql_event_date = "DATE(`start_time`)"; //TODO: paging the next event date
+        $this->Event->recursive = 2;
+        $todayEvents = $this->Event->find("all", array("conditions" => array($sql_event_date . " = DATE('$event_date')"), "order" => "start_time"));
+
+        $strEventId = "(";
+        foreach ($todayEvents as $event) {
+            $strEventId = $strEventId . $event["Event"]["id"] . ",";
+        }
+        if (substr($strEventId, -1) == ",") {
+            $strEventId = substr($strEventId, 0, -1) . ")";
+        } else {
+            $strEventId = "()";
+        }
+
+        $Facebook = new FB();
+        $strFQL = str_replace(" ", "+", "select eid,all_members_count, attending_count FROM event where eid IN " . $strEventId);
+        //$fqlAttendng = $Facebook->api("/fql?q=" . $strFQL);
+        //TODO: Need time to delay 2 request.
+        //Find friend join the event
+        $strFQL2 = str_replace(" ", "+", "SELECT eid,uid FROM event_member WHERE eid IN " . $strEventId . " AND rsvp_status = 'attending' AND uid IN (SELECT uid2 FROM friend WHERE uid1 = me())");
+
+        $fql = $Facebook->api("/fql?q={\"attending\":\"" . $strFQL . "\",\"amis\":\"" . $strFQL2 . "\"}");
+
+        debug($fql);
     }
 
     function getDistance($lat1, $lon1, $lat2, $lon2, $unit) {
