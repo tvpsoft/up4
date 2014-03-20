@@ -1,13 +1,11 @@
 <div class="row clearfix">
     <div class="col-md-8 column">
         <h4><?php echo __("Rejoindre un RDV à proximité"); ?></h4>
-        <h5>Total de <?= $statTotal[0][0]["total_events"] ?> événements de <?= strftime("%A %d %B %G", strtotime($statTotal[0][0]["min_date"])) ?> à <?= strftime("%A %d %B %G", strtotime($statTotal[0][0]["max_date"])) ?>
-
-
-
-        </h5>
+        <h5>Total de <?= $statTotal[0][0]["total_events"] ?> événements de <?= strftime("%A %d %B %G", strtotime($statTotal[0][0]["min_date"])) ?> à <?= strftime("%A %d %B %G", strtotime($statTotal[0][0]["max_date"])) ?></h5>
+        <?= $this->Form->hidden("isAll", array("value" => $isAll)) ?>
     </div>
     <div class="col-md-4 column text-right">
+        <input type="checkbox" value="<?= $isAll ?>" id="checkFilter" <?= ($isAll != "all") ? "checked" : "" ?> ><?= __(" 20 km du centre de Paris"); ?>
         <button class="btn btn-primary" id='btnRefresh'><?php echo __("Refresh") ?></button>
     </div>
 </div>
@@ -47,6 +45,13 @@
 
 <script>
 
+    $("#checkFilter").click(function() {
+        var filter = "all";
+        if ($("#checkFilter").val() === "all") {
+            filter = "";
+        }
+        location.replace("/up4/events/index/" + filter);
+    });
     $("#btnRefresh").click(
             function()
             {
@@ -63,8 +68,8 @@
                 }).done(function(e) {
                     $('#list_events').html(e);
                     $(".loadingG").hide();
+                    location.reload();
                 });
-                $("#firstEventDate").click();
                 return false;
             }
     );
@@ -72,7 +77,7 @@
     {
         $(".loadingG").show();
         $.ajax({
-            url: "<?php echo Router::Url(array('controller' => 'events', 'action' => 'events_by_day/'), TRUE); ?>" + "/" + event_day + "/" + myLatitide + "/" + myLongitude,
+            url: "<?php echo Router::Url(array('controller' => 'events', 'action' => 'events_by_day/'), TRUE); ?>" + "/" + event_day + "/" + myLatitide + "/" + myLongitude + "/" + $("#checkFilter").val(),
             context: document.body
         }).done(function(e) {
             $('#panel-body-' + event_day).html(e);

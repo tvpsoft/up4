@@ -20,6 +20,9 @@ CREATE TABLE events (
     timezone VARCHAR(25) DEFAULT NULL,
     updated_time DATETIME DEFAULT NULL,
     is_date_only INT(1) DEFAULT NULL,
+    all_members_count BIGINT NULL DEFAULT NULL,
+    attending_count BIGINT NULL DEFAULT NULL,
+    center_distance FLOAT  NULL DEFAULT NULL,
     venue_id BIGINT(20) UNSIGNED DEFAULT NULL
 );
 

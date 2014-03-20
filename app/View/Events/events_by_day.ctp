@@ -11,7 +11,7 @@ foreach ($todayEvents as $event) {
                 <div class="event_title"><?= $this->Html->link($event["Event"]["name"],"http://www.facebook.com/event.php?eid=".$event["Event"]["id"],array("target"=>"blank")) ?></div>
                 <div class="event_time"><?= date("H\Hi", strtotime($event["Event"]["start_time"])) ?></div>
                 <div class="event_param">
-                    <?= !empty($event["Attending"])?$event["Attending"]["attending_count"]:"-" ?>/<?= !empty($event["Attending"])?$event["Attending"]["all_members_count"]:"-"  ?> 
+                    <?= !empty($event["Event"]["attending_count"])?$event["Event"]["attending_count"]:"-" ?>/<?= !empty($event["Event"]["all_members_count"])?$event["Event"]["all_members_count"]:"-"  ?> 
                     <?php if ($event["Event"]["attending_friends"] > 0) {
                         ?>
                         <a id="modal-<?= $event["Event"]["id"] ?>" href="#modal-container-<?= $event["Event"]["id"] ?>" role="button" data-toggle="modal">(<?= $event["Event"]["attending_friends"] ?> amis)</a>
